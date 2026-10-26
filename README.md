@@ -8,6 +8,17 @@ analytic arguments for convergence, period selection, and boundary constants.
 The drafts have undergone AI-assisted cross-checking; professional mathematical
 review, priority, and prize eligibility have not been established.
 
+## 题目来源
+
+原始出处是孙智伟的报告讲义 [Mysterious π-Series (II)](http://maths.nju.edu.cn/~zwsun/Pi-series(II).pdf#page=40)，
+封面日期为 **2023 年 1 月 12 日**，所研究的三式位于 **第 40/68 页**，
+页面标题为 **My conjectural series of type VI**。
+该版本在三式之后提出针对“三式首次严格证明”的 300 美元悬赏。
+
+本仓库仅处理该页顶部三条无穷级数等式，不包含下方的模 p² 同余猜想。
+逐题对应、原始链接和版本核对说明见 [PROBLEM_SOURCE.md](./PROBLEM_SOURCE.md)。
+另提供一份含出处的 [知乎回答草稿](./ZHIHU_ANSWER.md)。
+
 ## 阅读顺序
 
 1. [VI1、VI2 证明正文](./VI1_VI2_PROOF_2026-10-25.md)：同一参数族到两条经典 Ramanujan 级数。
@@ -35,8 +46,7 @@ $$
 =\frac{432(195\sqrt{14}+94\sqrt2)}{95\pi}.
 $$
 
-原始陈述见孙智伟 [Mysterious π-Series (II)，第 40/68 页](http://maths.nju.edu.cn/~zwsun/Pi-series(II).pdf)。
-该页的悬赏涉及“三式的首次严格证明”；本仓库不据此主张奖金资格。
+题目出处及历史悬赏说明见上文“题目来源”；本仓库不据此主张奖金资格。
 
 ## 最短复算
 
