@@ -1,0 +1,17 @@
+{
+  "pages": 15,
+  "pdf_sha256": "904a5cb9181690247b5d063bab3e3b5eb3e8c1e380bc10335f711e695745016e",
+  "tex_sha256": "09f4c2a49870516631ed497ff35fb522c24344521585cf2b28788856057a9d8c",
+  "all_fonts_embedded": true,
+  "font_count": 21,
+  "latex_layout_errors": 0,
+  "unresolved_references": 0,
+  "exact_literal_assertions": 77,
+  "requires_python_to_read": false,
+  "external_inputs": [
+    "Two classical Ramanujan evaluations",
+    "CM(7) modulus, period ratio and alpha value",
+    "Standard hypergeometric and elliptic identities"
+  ],
+  "scope": "Authoring algebra, typesetting and render verification only; not professional mathematical peer review"
+}

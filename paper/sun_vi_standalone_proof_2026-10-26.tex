@@ -1,0 +1,847 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=24mm,headheight=15pt]{geometry}
+\usepackage{fontspec,xeCJK}
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont{Consolas}
+\setCJKmainfont[BoldFont=SimHei,ItalicFont=KaiTi]{SimSun}
+\setCJKsansfont{Microsoft YaHei}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,booktabs,longtable,array,enumitem}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!60!black,citecolor=blue!50!black]{hyperref}
+\usepackage{xcolor,fancyhdr}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small 孙智伟 VI 型三条级数等式}
+\fancyhead[R]{\small 独立数学审阅稿}
+\fancyfoot[C]{\thepage}
+\setlength{\parindent}{2em}\setlength{\parskip}{0.22em}
+\linespread{1.10}\allowdisplaybreaks[2]
+\emergencystretch=1.5em
+\numberwithin{equation}{section}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{proposition}[theorem]{命题}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{说明}
+\renewcommand{\proofname}{证明}
+\renewcommand{\contentsname}{目录}
+\renewcommand{\abstractname}{摘要}
+\renewcommand{\refname}{参考文献}
+\newcommand{\dd}{\mathrm d}
+\newcommand{\HH}{\mathscr H}
+\newcommand{\ee}{\boldsymbol e}
+\newcommand{\RR}{\mathcal R}
+\newcommand{\Afun}{\mathcal A}
+\newcommand{\BB}{\mathcal B}
+\newcommand{\Dop}{\mathfrak D}
+\newcommand{\Sop}{\mathfrak S}
+\newcommand{\row}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\hypersetup{pdftitle={孙智伟 VI 型三条 pi 级数等式的证明},pdfauthor={Aletheiar},pdfsubject={Standalone mathematical manuscript for review}}
+
+\begin{document}
+\begin{center}
+{\LARGE\bfseries 孙智伟 VI 型三条 $\pi$ 级数等式的证明}\par\vspace{0.5em}
+{\large 可逐式人工审阅稿}\par\vspace{0.6em}
+整理与提交：Aletheiar\qquad 2026 年 10 月 26 日
+\end{center}
+\begin{abstract}
+本文把 VI1、VI2、VI3 的三条无穷级数等式整理为一份不依赖程序运行的数学证明稿。
+从广义中心三项式系数的母函数出发，给出全部有理函数求和证书、四分量验算规则、
+微分方程的拉回、收敛与零边界论证，以及第三式的实际周期归一化和非零边界常数。
+最后分别归约到两条经典 Ramanujan 求值和七次奇异模数的已知精确值。
+这些古典输入的公式、使用条件和出处均明确列出。
+读者只需审查本文中的有限代数恒等式与分析论证，无须 Python、JSON、历史研究日志或数值计算。
+本稿供独立数学审阅，不主张首次性、专业审稿已通过或奖金资格。
+\end{abstract}
+\noindent\textbf{阅读提示。} 主证明在第 1--7 节；附录 A 将四组证书写成可逐分量通分的恒等式，
+给出非平凡分量的完整验算和有限系数检查表。
+附录 B 写出最后的常数消去。
+研究过程中使用了 ChatGPT/Codex 与 DeepSeek 辅助推导及交叉核验；
+本文的证明理由是所列数学恒等式和论证，而非程序打印的结论。
+\setcounter{tocdepth}{1}
+\tableofcontents
+\newpage
+
+\section{原始命题、记号与外部输入}
+对 $n\ge0$ 定义
+\begin{equation}\label{eq:Tdef}
+ T_n(b,c)=[v^n](v^2+bv+c)^n
+ =\sum_{j=0}^{\lfloor n/2\rfloor}\binom n{2j}\binom{2j}j b^{n-2j}c^j.
+\end{equation}
+原始出处是孙智伟的讲义 \emph{Mysterious $\pi$-Series (II)}，
+所核对版本封面日期为 2023 年 1 月 12 日，第 40/68 页，
+页标题为 ``My conjectural series of type VI''\cite{Sun}。
+本文仅处理该页顶部三条级数等式，不包含同页下方的模 $p^2$ 同余猜想。
+
+\begin{theorem}\label{thm:main}
+下列三个绝对收敛级数满足
+\begin{align}
+ \sum_{n=0}^{\infty}(66n+17)\frac{T_n(10,121)^3}{55296^n}
+ &=\frac{540\sqrt2}{11\pi},\label{eq:VI1}\\
+ \sum_{n=0}^{\infty}(126n+31)\frac{T_n(22,441)^3}{(-512000)^n}
+ &=\frac{880\sqrt5}{21\pi},\label{eq:VI2}\\
+ \sum_{n=0}^{\infty}(3990n+1147)\frac{T_n(62,9025)^3}{(-23887872)^n}
+ &=\frac{432(195\sqrt{14}+94\sqrt2)}{95\pi}.\label{eq:VI3}
+\end{align}
+\end{theorem}
+
+记 $(a)_n=a(a+1)\cdots(a+n-1)$，$(a)_0=1$，并使用通常的超几何级数定义。
+以下三项非本文新证的输入会在最后求值时使用：
+\begin{enumerate}[label=(C\arabic*),leftmargin=3em]
+\item 对 $W(z)={}_3F_2(\tfrac12,\tfrac13,\tfrac23;1,1;z)$，$\Theta=z\dd/\dd z$，
+\begin{equation}\label{eq:classic12}
+ (2+15\Theta)W(2/27)=\frac{27}{4\pi},\qquad
+ (4+33\Theta)W(4/125)=\frac{15\sqrt3}{2\pi}.
+\end{equation}
+它们见 Chan--Liaw 正式出版稿第 219 页 (1.1)、(1.2)\cite{ChanLiaw}；
+两个自变量都在绝对收敛区间 $(0,1)$ 内。
+\item 完全椭圆积分以\emph{参数} $m$ 为变量：
+\begin{equation}\label{eq:KEdef}
+ K(m)=\int_0^{\pi/2}\frac{\dd u}{\sqrt{1-m\sin^2u}},\qquad
+ E(m)=\int_0^{\pi/2}\sqrt{1-m\sin^2u}\,\dd u.
+\end{equation}
+令 $m_7=(8-3\sqrt7)/16$。七次奇异模数及 $\alpha$ 值给
+\begin{equation}\label{eq:CM}
+ \frac{K(1-m_7)}{K(m_7)}=\sqrt7,\qquad
+ \frac{\pi}{4K(m_7)^2}+\sqrt7\left(1-\frac{E(m_7)}{K(m_7)}\right)
+ =\frac{\sqrt7-2}{2}.
+\end{equation}
+见 Borwein--Borwein 第 57 页 $N=7$ 的例子\cite{Borwein}。
+该文以模数 $k$ 为变量，本文的 $m=k^2$；其 $2k_7k'_7=1/8$
+给出上面位于 $(0,1/2)$ 的 $m_7$。
+\item 使用 Gauss 求和、Clausen 恒等式、二次变换及 Legendre 关系的标准形式。
+本文在使用处给出所需公式及实区间条件，参见\cite{DLMF15,DLMF16,DLMF19}。
+\end{enumerate}
+
+\section{三项式母函数与可手算的有限维求和规则}
+\subsection{母函数、递推、参数微分}
+设 $b,c$ 是一个参数 $q$ 的可微函数，$d=b^2-4c$，$U_n=T_n(b,c)$。
+从\eqref{eq:Tdef} 或二项式展开得
+\begin{equation}\label{eq:GF}
+ F(v)=\sum_{n\ge0}U_nv^n=(1-2bv+dv^2)^{-1/2}.
+\end{equation}
+对 $v$ 微分并比较系数，得到
+\begin{equation}\label{eq:rec}
+ (n+1)U_{n+1}=(2n+1)bU_n-ndU_{n-1},\qquad U_0=1,\quad U_{-1}=0.
+\end{equation}
+在 $c\ne0$ 时定义（撇号表示对 $q$ 求导）
+\begin{equation}\label{eq:sigtau}
+ \sigma=\frac{bb'-d'/2}{b^2-d},\qquad
+ \tau=-\frac{db'-bd'/2}{b^2-d}.
+\end{equation}
+则
+\begin{equation}\label{eq:Uder}
+ U_n'=n(\sigma U_n+\tau U_{n-1}).
+\end{equation}
+为核查它，将右端求和为
+$\sigma vF_v+\tau v(vF_v+F)$；除以 $F$ 后只需核对
+\[
+ \frac{b'v-d'v^2/2}{1-2bv+dv^2}
+ =\sigma\frac{v(b-dv)}{1-2bv+dv^2}
+ +\tau v\left(1+\frac{v(b-dv)}{1-2bv+dv^2}\right),
+\]
+通分后的两个系数正是\eqref{eq:sigtau}。
+结合\eqref{eq:rec}，还得到
+\begin{equation}\label{eq:Vder}
+ U_{n-1}'=-\frac{n\tau}{d}U_n+
+ \left((n-1)\sigma+\frac{(2n-1)b\tau}{d}\right)U_{n-1}.
+\end{equation}
+以下在 $d\ne0$ 的开区间使用此式，端点如有表观奇点另行用解析性处理。
+
+\subsection{四维状态、微分与移位}
+给定 $w(q)$，令
+\[
+ X_n=w^n\row{U_n^3&U_n^2U_{n-1}&U_nU_{n-1}^2&U_{n-1}^3}^{\!T}.
+\]
+采用 $j,k=0,1,2,3$ 的编号，记 $\omega=w'/w$，
+\begin{equation}\label{eq:mj}
+ m_j=(3-j)n\sigma+j\left((n-1)\sigma+\frac{(2n-1)b\tau}{d}\right)+n\omega.
+\end{equation}
+由乘积法则和\eqref{eq:rec}，有 $X_n'=M_nX_n$、$X_{n+1}=N_nX_n$，其中
+\begin{align}
+ (M_n)_{jj}&=m_j,& (M_n)_{j,j+1}&=(3-j)n\tau,&
+ (M_n)_{j,j-1}&=-jn\tau/d,\label{eq:M}\\
+ (N_n)_{jk}&=w\binom{3-j}{k}\alpha_n^{3-j-k}\beta_n^k\quad(k\le3-j),
+ &\alpha_n&=\frac{(2n+1)b}{n+1},&\beta_n&=-\frac{nd}{n+1}.\label{eq:N}
+\end{align}
+未列出的元素均为零。$n=0$ 时 $X_0=(1,0,0,0)^T$，故同样成立。
+
+为完全消除矩阵运算的黑箱，下面列出两个行向量运算。
+对 $r=(r_0,r_1,r_2,r_3)$，
+\begin{align}
+ (\Dop_nr)_k&=r_k'+m_kr_k+(4-k)n\tau r_{k-1}
+                    -(k+1)n\tau r_{k+1}/d,\label{eq:Drow}\\
+ \Sop_nr&=w\bigl(\alpha_n^3r_0+\alpha_n^2r_1+\alpha_nr_2+r_3,\notag\\[-0.3em]
+ &\hspace{18mm}\beta_n(3\alpha_n^2r_0+2\alpha_nr_1+r_2),\
+ \beta_n^2(3\alpha_nr_0+r_1),\ \beta_n^3r_0\bigr),\label{eq:Srow}
+\end{align}
+约定越界分量为零。它们就是 $r'+rM_n$ 与 $rN_n$。
+
+令 $\ee_0=(1,0,0,0)$、$\ee_{j+1}=\Dop_n\ee_j$。
+则 $(U_n^3w^n)^{(j)}=\ee_jX_n$。附录 A.1 给出至 $j=3$ 的每个分量，
+所以本文的证书恒等式都可直接化为四条普通有理函数恒等式。
+
+\begin{lemma}[有限求和规则]\label{lem:tel}
+设 $L=\sum_{j=0}^3\ell_j(q)D_q^j$，并给定显式行向量 $R_n$ 满足
+\begin{equation}\label{eq:tel-general}
+ \sum_{j=0}^3\ell_j\ee_j=\Sop_nR_{n+1}-R_n,\qquad R_0=0.
+\end{equation}
+若级数及所用导数局部正常收敛，且 $R_nX_n\to0$，则
+$G=\sum_{n\ge0}U_n^3w^n$ 满足 $LG=0$。
+\end{lemma}
+\begin{proof}
+乘\eqref{eq:tel-general}以 $X_n$，用 $X_{n+1}=N_nX_n$，再从 $n=0$ 加到 $N$，得到
+\[
+ L\sum_{n=0}^NU_n^3w^n=R_{N+1}X_{N+1}-R_0X_0.
+\]
+在已说明的正常收敛和边界条件下令 $N\to\infty$ 即得结论。
+这一步必须同时核对有限端与无穷远端，不能只检查 $R_0=0$。
+\end{proof}
+
+\subsection{积分表示和收敛主控}
+对实数 $b$、$c>0$，二项式积分直接给
+\begin{equation}\label{eq:Uint}
+ T_n(b,c)=\frac1\pi\int_0^\pi(b+2\sqrt c\cos u)^n\dd u,
+ \qquad |T_n(b,c)|\le(|b|+2\sqrt c)^n.
+\end{equation}
+对复邻域亦可使用 $|b|+2\sqrt{|c|}$ 的界。
+若 $|w|(|b|+2\sqrt{|c|})^3<1$ 在某紧集上一致成立，
+则带任意固定次数 $n$ 权的级数局部正常收敛。
+取稍大复邻域后用 Cauchy 估计，所需有限阶参数导数也正常收敛。
+证书的分量若至多按 $n$ 多项式增长，其边界 $R_nX_n$ 亦趋于零。
+
+\section{VI1、VI2 的同一参数族与全阶恒等式}
+取
+\begin{equation}\label{eq:fam12}
+ b=1-6x,\quad c=(1-3x)^2,\quad d=3(4x-1),\quad
+ w=\frac{x}{1-4x},\quad U_n=T_n(b,c),
+\end{equation}
+并定义 $G=\sum U_n^3w^n$、$H=\sum nU_n^3w^n$。
+这里 $H$ 是固定 $b,c$ 后的 $w$ 加权导数沿族的限制，通常不等于 $xG'$。
+由\eqref{eq:sigtau} 得
+\[
+ \sigma=\tau=\frac3{3x-1},\qquad \omega=\frac1{x(1-4x)}.
+\]
+区间 $I=[-1/60,1/36]$ 上 $b,c>0$，主控比为
+\begin{equation}\label{eq:ratio12}
+ |w|(b+2\sqrt c)^3=27|x|(1-4x)^2\le\frac{16}{27}<1.
+\end{equation}
+确实，正半段导数为 $27(1-4x)(1-12x)>0$，负半段符号相反；
+端点值分别为 $16/27$、$64/125$。
+因此可在目标点之间沿实段作正常求和及解析延拓。
+使用含 $1/x$ 的状态公式时先去掉 $x=0$，再由原级数解析性补回。
+
+\subsection{三阶方程和完整证书}
+令 $L=\ell_3D_x^3+\ell_2D_x^2+\ell_1D_x+\ell_0$，其中
+\begin{align}
+ \ell_3&=x^3(3x-1)(4x-1)^3(12x+1),\notag\\
+ \ell_2&=3x^2(4x-1)^2(432x^3-156x^2+6x+1),\notag\\
+ \ell_1&=x(4x-1)(10800x^4-5148x^3+636x^2-3x-1),\label{eq:L12}\\
+ \ell_0&=x(17280x^4-10368x^3+1944x^2-102x-1).\notag
+\end{align}
+取行向量 $R_n$ 的四个分量为
+\begin{align}
+ R_{n,0}&=\frac{n^3(4x-1)(72x^3+18x^2-12x+1)}{(3x-1)^2},\notag\\
+ R_{n,1}&=-\frac{9n^2x(4x-1)^2}{(3x-1)^2}
+       \{n(72x^2-32x+1)+1-8x\},\notag\\
+ R_{n,2}&=\frac{27n^2x(4x-1)^2}{(3x-1)^2}
+       \{n(48x^3-84x^2+27x-2)\notag\\
+ &\hspace{47mm}{}+24x^3-12x^2+6x-1\},\label{eq:R12}\\
+ R_{n,3}&=\frac{27n^3x(4x-1)^3(12x^2-12x+1)}{(3x-1)^2}.\notag
+\end{align}
+将\eqref{eq:R12}代入\eqref{eq:Srow}，有
+\begin{equation}\label{eq:cert12}
+ \Sop_nR_{n+1}-R_n=\sum_{j=0}^3\ell_j\ee_j,\qquad R_0=0.
+\end{equation}
+四个分量的通分办法、有限系数表及其中一分量的完整展开见附录 A。
+全部输入已在\eqref{eq:Drow}--\eqref{eq:R12}明示，无须另读证书文件。
+由\eqref{eq:ratio12}及引理\ref{lem:tel}，$LG=0$。
+
+\subsection{超几何拉回及解析解唯一性}
+设
+\[
+ z=108x^2(1-4x),\qquad P=\frac{\sqrt{1-4x}}{1-3x},\qquad
+ \lambda=\frac{P'}P=-\frac2{1-4x}+\frac3{1-3x}.
+\]
+平方根在 $x=0$ 取正支。$W$ 的级数定义给出微分方程
+\begin{equation}\label{eq:H3F2}
+ \mathcal H_zW=0,\qquad
+ \mathcal H_z=z^3(1-z)D_z^3+z^2(3-9z/2)D_z^2
+                    +z(1-29z/9)D_z-z/9.
+\end{equation}
+以下给出拉回计算的每个系数。对任意 $f(z)$，写
+$L(Pf(z))/P=\sum_{k=0}^3 C_k f^{(k)}(z)$。链式法则给
+\begin{align}
+ C_0={}&\ell_0+\ell_1\lambda+\ell_2(\lambda'+\lambda^2)
+              +\ell_3(\lambda''+3\lambda\lambda'+\lambda^3),\notag\\
+ C_1={}&\ell_1z'+\ell_2(2\lambda z'+z'')
+     +\ell_3\{3(\lambda'+\lambda^2)z'+3\lambda z''+z'''\},\notag\\
+ C_2={}&\ell_2(z')^2+\ell_3\{3\lambda(z')^2+3z'z''\},\label{eq:pull12coeff}\\
+ C_3={}&\ell_3(z')^3.\notag
+\end{align}
+代入\eqref{eq:L12}后，四个有限有理式分别为
+\begin{equation}\label{eq:pull12table}
+ (C_0,C_1,C_2,C_3)=8(3x-1)(6x-1)
+ \bigl(-z/9,\ z(1-29z/9),\ z^2(3-9z/2),\ z^3(1-z)\bigr).
+\end{equation}
+因而 $L(PW(z))=0$。这是一项明确的有限代数计算，不依赖数值识别。
+
+令 $\theta=xD_x$。从\eqref{eq:L12}可见
+$L=\theta^3+\sum_{j=1}^{5}x^jQ_j(\theta)$，其中 $Q_j$ 是多项式。
+故解析解 $\sum a_nx^n$ 的第 $n\ge1$ 项由以前项唯一确定，待求系数的乘数为 $n^3\ne0$。
+又 $G(0)=P(0)W(0)=1$，所以
+\begin{equation}\label{eq:G12}
+ \boxed{G(x)=P(x)W(z(x)).}
+\end{equation}
+这里先在原点邻域证明。$I$ 上 $z\in[0,2/27]$，两端的分母和正平方根均无歧义，
+故由实段的复邻域解析延拓到整个 $I$。
+
+\subsection{固定参数加权导数，及齐次常数为零的理由}
+置
+\begin{align*}
+ a_0(x)&=-9x^2(4x-1),\\
+ a_1(x)&=-(3x-1)(4x-1)(6x-1)x,\\
+ a_2(x)&=(3x-1)^2(12x-1),\\
+ V_n&=a_0\ee_0+a_1\ee_1+a_2n\ee_0,\qquad
+ \nu=\frac{6x-1}{x(4x-1)},
+\end{align*}
+并取
+\begin{equation}\label{eq:S12}
+ S_n=\left(0,\frac{9n^2(4x-1)}{3x-1},\frac{27n^2x(4x-1)}{3x-1},0\right).
+\end{equation}
+直接按\eqref{eq:Drow}--\eqref{eq:Srow}核对，得到
+\begin{equation}\label{eq:normal12cert}
+ \Dop_nV_n-\nu V_n=\Sop_nS_{n+1}-S_n,\qquad S_0=0.
+\end{equation}
+在\eqref{eq:ratio12}下求和，$Y=a_0G+a_1G'+a_2H$ 满足 $Y'=\nu Y$，故
+$Y=Cx\sqrt{1-4x}$。
+从定义直接得 $G=1+x+O(x^2)$、$H=x+O(x^2)$，因而 $Y=O(x^2)$，迫使 $C=0$。
+解出 $H$ 为
+\begin{equation}\label{eq:H12}
+ H=A(x)G+B(x)xG',\quad
+ A=\frac{9x^2(4x-1)}{(3x-1)^2(12x-1)},\quad
+ B=\frac{(4x-1)(6x-1)}{(3x-1)(12x-1)}.
+\end{equation}
+所有结论来自全阶证书、正常求和和原点条件，不依赖有限项展开的吻合。
+
+\section{VI1 与 VI2 的最终求值}
+由定义可见尺度关系 $T_n(sb,s^2c)=s^nT_n(b,c)$。
+\eqref{eq:fam12}的两个点与原题对应如下：
+\begin{center}\begin{tabular}{c c c c c c}\toprule
+ & $x$ & 尺度 $s$ & $sb$ & $s^2c$ & $w/s^3$\\\midrule
+ VI1 & $1/36$ & $12$ & $10$ & $121$ & $1/55296$\\
+ VI2 & $-1/60$ & $20$ & $22$ & $441$ & $-1/512000$\\\bottomrule
+\end{tabular}\end{center}
+对权重 $a+bn$，由\eqref{eq:G12}--\eqref{eq:H12}得
+\begin{equation}\label{eq:weight12}
+ aG+bH=P\{(a+bA+bBx\lambda)W+bBx(z'/z)\Theta W\}.
+\end{equation}
+全部代入值为
+\begin{center}\small\begin{tabular}{c c c}\toprule
+ & VI1 & VI2\\\midrule
+ $P$ & $8\sqrt2/11$ & $16\sqrt{15}/63$\\
+ $A$ & $4/363$ & $8/3969$\\
+ $B$ & $40/33$ & $176/189$\\
+ $z$ & $2/27$ & $4/125$\\
+ $P(a+bA+bBx\lambda)$ & $160\sqrt2/11$ & $1408\sqrt{15}/189$\\
+ $PbBxz'/z$ & $1200\sqrt2/11$ & $3872\sqrt{15}/63$\\\bottomrule
+\end{tabular}\end{center}
+表中两列分别用 $(a,b)=(17,66)$、$(31,126)$。
+因此
+\[
+ 17G+66H=\frac{80\sqrt2}{11}(2+15\Theta)W(2/27),\qquad
+ 31G+126H=\frac{352\sqrt{15}}{189}(4+33\Theta)W(4/125).
+\]
+用古典输入\eqref{eq:classic12}并相乘，便得\eqref{eq:VI1}、\eqref{eq:VI2}。
+
+\section{VI3：新的参数族、微分方程与椭圆解空间}
+\subsection{参数族和正常收敛}
+取 $0<t\le7/9$，并令
+\begin{equation}\label{eq:fam3}
+ \begin{gathered}
+ D=t^2-t-1,\quad b=2(t^2+t-1),\quad c=(1+t-t^2)^2,\quad d=16t(t^2-1),\\
+ w=\frac1{64(t-1)(t+1)^2},\qquad
+ G(t)=\sum_{n\ge0}T_n(b,c)^3w^n,\quad H(t)=\sum_{n\ge0}nT_n(b,c)^3w^n.
+ \end{gathered}
+\end{equation}
+通用状态中的系数为
+\begin{equation}\label{eq:sigtau3}
+ \sigma=\frac{2t-1}{D},\qquad\tau=-\frac{4(t^2+1)}D,\qquad
+ \omega=-\frac1{t-1}-\frac2{t+1}.
+\end{equation}
+因 $\sqrt c=1+t-t^2>0$，$b+2\sqrt c=4t$、$b-2\sqrt c=4(t^2-1)$，
+\eqref{eq:Uint}给 $|U_n|\le[4\max(t,1-t^2)]^n$。
+相应的两个比值为
+\begin{equation}\label{eq:ratio3}
+ s(t)=(1-t)^2(1+t)<1,\qquad k(t)=\frac{t^3}{(1-t)(1+t)^2}\le\frac{343}{512}<1.
+\end{equation}
+$s'=(t-1)(3t+1)<0$，$k'/k=(3-t)/(t(1-t)(1+t))>0$。
+故每个离开零端点的紧子区间上，所需级数、导数与证书边界均正常收敛。
+这里不能把 $s(t)\to1$ 的退化主控用于 $t\downarrow0$；端点将在第 6 节单独证明。
+
+\subsection{三阶方程与两组全部证书}
+定义 $L_3=D_t^3+a_2D_t^2+a_1D_t+a_0$，其中
+\begin{align}
+ a_2&=\frac{3(2t-1)(3t^2-3t-1)}{2t(t-1)D},\notag\\
+ a_1&=\frac{75t^5-3t^4-128t^3-t^2+59t-6}{4t(t-1)^2(t+1)^2D},\label{eq:L3}\\
+ a_0&=\frac{60t^6+21t^5-130t^4-35t^3+65t^2+50t-23}{8t(t-1)^3(t+1)^3D}.\notag
+\end{align}
+为简写证书，先列出六个普通多项式：
+\begin{align*}
+ F_0&=6t^5+3t^4+10t^3-22t^2+8t+3,\\
+ F_3&=3t^5-8t^4-22t^3-10t^2+3t-6,\\
+ A_1&=12t^6-4t^5-36t^4-4t^3-10t^2-20t-2,\\
+ B_1&=-4t^5-15t^4-7t^3+8t^2+t+1,\\
+ A_2&=2t^6-20t^5+10t^4-4t^3+36t^2-4t-12,\\
+ B_2&=t^6-t^5+8t^4+7t^3-15t^2+4t.
+\end{align*}
+取
+\begin{equation}\label{eq:R3}
+ \begin{aligned}
+ R_{n,0}&=\frac{n^3F_0}{t^2(t-1)^2(t+1)D^3},&
+ R_{n,1}&=\frac{6n^2(nA_1+B_1)}{t^2(t-1)(t+1)D^3},\\
+ R_{n,2}&=\frac{24n^2(nA_2+B_2)}{t(t-1)D^3},&
+ R_{n,3}&=-\frac{64n^3F_3}{D^3}.
+ \end{aligned}
+\end{equation}
+按\eqref{eq:Drow}--\eqref{eq:Srow}逐分量通分，得到
+\begin{equation}\label{eq:cert3}
+ \Sop_nR_{n+1}-R_n=\ee_3+a_2\ee_2+a_1\ee_1+a_0\ee_0,\qquad R_0=0.
+\end{equation}
+附录 A 给出明示的四分量验算，因此在\eqref{eq:ratio3}下求和有 $L_3G=0$。
+
+另外定义
+\begin{align}
+ \Afun&=\frac{3(t-1)(t^2+1)(t^2+t+1)}{8D^2},\notag\\
+ \BB&=\frac{(t-1)(t+1)(t^2+2t-1)}{4D},\qquad
+ \RR=\frac{(t^2+1)(t+1)\sqrt{1-t}}{\sqrt tD^2},\label{eq:ABR}\\
+ \rho&=\frac{\RR'}{\RR}
+ =\frac{2t}{t^2+1}+\frac1{t+1}+\frac1{2(t-1)}-\frac1{2t}-\frac{2(2t-1)}D.\notag
+\end{align}
+令 $V_n=n\ee_0-\Afun\ee_0-\BB\ee_1$，取
+\begin{equation}\label{eq:S3}
+ S_n=\left(0,-\frac{3n^2(t-1)(t+1)(t^2+1)(2t^2+7t+1)}{tD^3},
+ -\frac{12n^2(t-1)(t+1)^2(t^2+1)(t^2-7t+2)}{D^3},0\right).
+\end{equation}
+则
+\begin{equation}\label{eq:normal3cert}
+ \Dop_nV_n-\rho V_n=\Sop_nS_{n+1}-S_n,\qquad S_0=0.
+\end{equation}
+正常求和给 $(H-\Afun G-\BB G')'=\rho(H-\Afun G-\BB G')$。因此
+\begin{equation}\label{eq:H3general}
+ H=\Afun G+\BB G'+C\RR
+\end{equation}
+在连通区间 $(0,7/9]$ 上成立，$C$ 是尚待由原级数确定的常数。
+
+\subsection{椭圆微分方程的显式拉回}
+取
+\begin{equation}\label{eq:mP}
+ m(t)=\frac12-\frac{\sqrt t}{1+t},\qquad
+ P(t)=\frac{\sqrt{1-t}}{1+t-t^2},\qquad K_c=K(1-m).
+\end{equation}
+此区间上 $0<m<1/2$，所有根号取正实支。
+由积分定义，$K$ 与 $K_c$ 都满足关于 $m$ 的 Legendre 方程
+\[
+ m(1-m)y_{mm}+(1-2m)y_m-y/4=0.
+\]
+代入 $m(t)$，得到 $y''+py'+qy=0$，其中
+\begin{equation}\label{eq:pq3}
+ p=\frac{3t-1}{2t(t-1)},\qquad q=-\frac1{4t(1+t)^2}.
+\end{equation}
+例如 $m'=(t-1)/(2\sqrt t(1+t)^2)$，
+$m(1-m)=(1-t)^2/(4(1+t)^2)$，所以链式法则的
+$p=(1-2m)m'/[m(1-m)]-m''/m'$、$q=-(m')^2/[4m(1-m)]$
+正好化为\eqref{eq:pq3}。
+
+两条二阶解的任意乘积 $v$ 满足
+\begin{equation}\label{eq:square}
+ v'''+3pv''+(p'+4q+2p^2)v'+(2q'+4pq)v=0.
+\end{equation}
+这由两次乘积法则及消去 $y''=-py'-qy$ 即得。
+令 $\lambda=P'/P=1/[2(t-1)]-(2t-1)/D$，以 $v=Y/P$ 代入\eqref{eq:square}，系数为
+\begin{align}
+ a_2&=3p-3\lambda,\notag\\
+ a_1&=3\lambda^2-3\lambda'-6p\lambda+p'+4q+2p^2,\label{eq:gaugesquare}\\
+ a_0&=-\lambda''+3\lambda\lambda'-\lambda^3+3p(\lambda^2-\lambda')
+ -(p'+4q+2p^2)\lambda+2q'+4pq.\notag
+\end{align}
+代入\eqref{eq:pq3}恰得\eqref{eq:L3}，故
+\begin{equation}\label{eq:basisraw}
+ PK(m)^2,\qquad PK(m)K_c,\qquad PK_c^2
+\end{equation}
+均是 $L_3Y=0$ 的解。
+下一节从原级数独立计算三项渐近，确定 $G$ 在这个解空间中的实际位置。
+
+\section{VI3：端点主控与实际周期的唯一确定}
+\subsection{与参数无关的可求和主控}
+令
+\[
+ C_n=\frac{\binom{2n}n}{4^n},\qquad \eta(t)=\frac{t}{1-t^2},\qquad
+ f_n(\eta)=\frac2\pi\int_0^{\pi/2}(\cos^2u-\eta\sin^2u)^n\dd u.
+\]
+在\eqref{eq:Uint}中换 $u\mapsto\pi-u$、再用半角公式，得
+$U_n=[-4(1-t^2)]^nf_n(\eta)$。因此
+\begin{equation}\label{eq:fseries}
+ G=\sum_{n\ge0}f_n(\eta)^3s^n,\quad H=\sum_{n\ge0}nf_n(\eta)^3s^n,\quad
+ f_n(0)=C_n,\quad f_n'(0)=-\frac{n}{2n-1}C_n\ (n\ge1).
+\end{equation}
+最后一式直接来自 Beta 积分
+$(2/\pi)\int\sin^2u\cos^{2n-2}u\dd u=C_n/(2n-1)$。
+
+先证明 $\sum C_n^3<\infty$。由 $C_{n+1}/C_n=(2n+1)/(2n+2)$，
+\[
+ \frac{n+1}{n+2}-\frac{(2n+1)^2}{4(n+1)^2}
+ =\frac{3n+2}{4(n+2)(n+1)^2}>0.
+\]
+从 $C_0=1$ 归纳得 $C_n\le(n+1)^{-1/2}$，故级数可求和。
+
+固定 $0<\eta_0<1$。对 $0\le\eta\le\eta_0$，在积分中用
+$|a-b|^j\le a^j+b^j$，得到
+\begin{align}
+ |f_n|&\le2C_n,\notag\\
+ |f_n'|&\le C_n\{n/(2n-1)+n\eta_0^{n-1}\}\le M_1C_n,
+ \quad M_1=1+(1-\eta_0)^{-2},\label{eq:majorants}\\
+ |f_n''|&\le C_n\left\{\frac{3n(n-1)}{(2n-1)(2n-3)}
+                 +n(n-1)\eta_0^{n-2}\right\}\le M_2C_n\quad(n\ge2),\notag\\
+ M_2&=2+2(1-\eta_0)^{-3}.\notag
+\end{align}
+$n=0$ 的一阶导数、$n=0,1$ 的二阶导数单独为零。
+其中二阶界的第一项不超过 $2$，因为其与 $2$ 的差为
+$(5n-3)(n-2)/[(2n-1)(2n-3)]\ge0$；
+其余项分别受非负几何级数的一阶、二阶导数之和控制。
+令 $g_n=f_n^3$，则
+\begin{equation}\label{eq:gmajorants}
+ |g_n'|\le12M_1C_n^3,\qquad
+ |g_n''|\le12(M_1^2+M_2)C_n^3.
+\end{equation}
+这些界都与 $t$ 无关，正是所需的可求和主控。
+
+\subsection{相邻超几何参数的精确求和}
+定义
+\[
+ \HH(z)={}_3F_2(\tfrac12,\tfrac12,\tfrac12;1,1;z)=\sum C_n^3z^n,
+\]
+\[
+ B(z)={}_3F_2(-\tfrac12,\tfrac12,\tfrac12;1,1;z),\quad
+ J_*(z)={}_3F_2(-\tfrac12,\tfrac32,\tfrac12;1,1;z).
+\]
+对 $n\ge1$，$[z^n]B=-C_n^3/(2n-1)$，逐项比较给出
+$J_*=2B-\HH$。令 $h=\HH(1)$、$j=J_*(1)$，于是
+\begin{equation}\label{eq:contiguous}
+ 3\sum_{n\ge1}\frac{n}{2n-1}C_n^3=\frac32\{h-B(1)\}=\frac34(h-j).
+\end{equation}
+所需 Clausen 恒等式是
+\[
+ {}_2F_1(a,b;a+b+\tfrac12;z)^2
+ ={}_3F_2(2a,2b,a+b;2a+2b,a+b+\tfrac12;z).
+\]
+取 $(a,b)=(1/4,1/4)$、$(-1/4,3/4)$，再使用
+\[
+ {}_2F_1(a,b;c;1)=\frac{\Gamma(c)\Gamma(c-a-b)}{\Gamma(c-a)\Gamma(c-b)}
+ \quad(\Re(c-a-b)>0),
+\]
+得到
+\begin{equation}\label{eq:hj}
+ h=\frac{\Gamma(1/4)^4}{4\pi^3},\qquad
+ j=\frac{16\pi}{\Gamma(1/4)^4}.
+\end{equation}
+两次 $c-a-b=1/2>0$，故在 $z=1$ 求和合法。
+
+记 $K_0=K(1/2)$，$K_1=K_m(1/2)$，$K_2=K_{mm}(1/2)$。
+在 $0\le m\le1/2$ 的主支上，标准二次变换是
+\[
+ {}_2F_1(\tfrac14,\tfrac14;1;4m(1-m))
+ ={}_2F_1(\tfrac12,\tfrac12;1;m)=\frac{2K(m)}\pi.
+\]
+结合 Clausen 公式，在 $0\le z\le1$ 有
+\begin{equation}\label{eq:ClausenK}
+ \HH(z)=\frac4{\pi^2}K\left(\frac{1-\sqrt{1-z}}2\right)^2.
+\end{equation}
+故 $h=4K_0^2/\pi^2$。用 Legendre 关系
+\begin{equation}\label{eq:Legendre}
+ K(m)E(1-m)+E(m)K(1-m)-K(m)K(1-m)=\pi/2
+\end{equation}
+以及 $K_m=(E-(1-m)K)/(2m(1-m))$，在 $m=1/2$ 得
+\begin{equation}\label{eq:K012}
+ K_1=\frac{\pi}{2K_0},\qquad K_2=K_0,\qquad j=\frac{4K_1^2}{\pi^2}.
+\end{equation}
+第二式也直接来自 Legendre 微分方程；最后一式结合\eqref{eq:hj}与 $h=4K_0^2/\pi^2$。
+
+\subsection{原级数的三项渐近及严格余项}
+由\eqref{eq:gmajorants}，对
+$(G(t)-\HH(s(t)))/t$ 使用主控收敛；注意 $\eta/t\to1$、$s^n\to1$，得到
+\begin{equation}\label{eq:limitG}
+ \frac{G(t)-\HH(s(t))}{t}\longrightarrow
+ -3\sum_{n\ge1}\frac{n}{2n-1}C_n^3=-\frac34(h-j).
+\end{equation}
+没有使用待证的周期组合来推导这个极限。
+另一方面 $1-s=t+t^2-t^3$。在\eqref{eq:ClausenK}中对 $K$ 在 $1/2$ 作 Taylor 展开，
+用\eqref{eq:K012}得到
+\[
+ \HH(s(t))=h-\frac2\pi\sqrt t+\frac{h+j}{4}t+O(t^{3/2}).
+\]
+因而
+\begin{equation}\label{eq:Gendpoint}
+ G(t)=h-\frac2\pi\sqrt t+(j-h/2)t+o(t).
+\end{equation}
+
+也可明示余项。令 $\eta_0=1/4$，则 $M_1=25/9$、$M_2=182/27$。
+当 $0<t\le1/5$，$\eta\le5/24<1/4$。Taylor 公式与绝对求和给
+\begin{equation}\label{eq:uniformerror}
+ \left|G(t)-\HH(s)-\eta D_*(s)\right|
+ \le\frac{2342}{27}\eta^2\HH(s),\qquad
+ D_*(z)=-\frac32\{\HH(z)-B(z)\}.
+\end{equation}
+常数为 $6(M_1^2+M_2)$。又
+$\sum n|[z^n]B|\le\sum C_n^3<\infty$，故 $B(s)-B(1)=O(1-s)$。
+结合 $\eta=t+O(t^3)$，可将\eqref{eq:Gendpoint}的余项加强为 $O(t^{3/2})$。
+
+\subsection{三阶解空间中实际组合的唯一性}
+令
+\begin{equation}\label{eq:Jcandidate}
+ \mathcal J(t)=\frac{P(t)}{\pi^2}\{3K(m(t))^2+K(1-m(t))^2\}.
+\end{equation}
+它是 $L_3Y=0$ 的解。用
+$m=1/2-\sqrt t+O(t^{3/2})$、$P=1-3t/2+O(t^2)$ 和\eqref{eq:K012}，
+直接展开\eqref{eq:Jcandidate}，常数项、$\sqrt t$ 项、$t$ 项分别为
+\[
+ \frac{4K_0^2}{\pi^2}=h,\qquad
+ -\frac{4K_0K_1}{\pi^2}=-\frac2\pi,\qquad
+ \frac{4K_1^2-2K_0^2}{\pi^2}=j-h/2.
+\]
+所以 $G-\mathcal J=o(t)$。
+为说明这足够，在\eqref{eq:basisraw}的张成空间内取
+\begin{align}
+ P(K+K_c)^2&=4K_0^2+O(t),\notag\\
+ P(K_c^2-K^2)&=4K_0K_1\sqrt t+O(t^{3/2}),\label{eq:adaptedbasis}\\
+ P(K_c-K)^2&=4K_1^2t+O(t^2).\notag
+\end{align}
+$K_0,K_1>0$，三个不同最低阶保证线性独立。
+$L_3$ 的系数在 $(0,7/9]$ 内无极点，其解空间维数是三，故这就是一组解基。
+任何解若为 $o(t)$，依次比较 $1,\sqrt t,t$ 三项，其三个常系数均为零。
+所以
+\begin{equation}\label{eq:G3}
+ \boxed{G(t)=\frac{P(t)}{\pi^2}\{3K(m(t))^2+K(1-m(t))^2\}.}
+\end{equation}
+
+\section{VI3：非零边界常数及最后求值}
+\subsection{从原级数确定常数，而非从目标值倒推}
+从\eqref{eq:gmajorants}和\eqref{eq:fseries}得
+\[
+ |H(t)-\Theta\HH(s(t))|\le12M_1\eta(t)\,\Theta\HH(s(t)),\qquad
+ \Theta=s\frac{\dd}{\dd s}.
+\]
+由\eqref{eq:ClausenK}的解析表达式求导，
+$\Theta\HH(s)=1/(\pi\sqrt{1-s})+O(1)$，从而
+\[
+ H(t)=\frac1{\pi\sqrt t}+O(1),\qquad
+ G'(t)=-\frac1{\pi\sqrt t}+O(1).
+\]
+第二式来自已证明的\eqref{eq:G3}，不是随意对一个 $o(t)$ 余项求导。
+又 $\Afun(0)=-3/8$、$\BB(0)=-1/4$、$\sqrt t\RR\to1$。
+将\eqref{eq:H3general}乘以 $\sqrt t$ 并取极限，得到
+$1/\pi=1/(4\pi)+C$，所以
+\begin{equation}\label{eq:H3}
+ \boxed{H=\Afun G+\BB G'+\frac3{4\pi}\RR.}
+\end{equation}
+
+\subsection{目标点、互补周期求导与精确消去}
+在 $t_0=7/9$，$b=62/81$、$\sqrt c=95/81$、$w/81^3=-1/23887872$。
+故\eqref{eq:VI3}左端是 $1147G(t_0)+3990H(t_0)$。
+此时 $m=m_7$。以下代入值可由\eqref{eq:mP}和\eqref{eq:ABR}直接求得：
+\begin{center}\begin{tabular}{c c c c}\toprule
+ $P(t_0)$ & $P'(t_0)$ & $m'(t_0)$ & $\RR(t_0)$\\\midrule
+ $27\sqrt2/95$ & $-729\sqrt2/1444$ & $-27\sqrt7/1792$ & $3744\sqrt{14}/12635$\\\bottomrule
+\end{tabular}\end{center}
+\[
+ \Afun(t_0)=-\frac{2509}{10830},\quad
+ \BB(t_0)=\frac{752}{7695},\quad
+ 1147+3990\Afun(t_0)=\frac{4230}{19},\quad
+ 3990\BB(t_0)=\frac{10528}{27}.
+\]
+须先求导再代入 CM 比值。对变量 $m$，用
+\[
+ K_m=\frac{E-(1-m)K}{2m(1-m)},\qquad
+ (K_c)_m=-\frac{E_c-mK_c}{2m(1-m)}
+\]
+求\eqref{eq:G3}的导数；在 $m_7$ 才令 $K_c=\sqrt7K$。
+由\eqref{eq:Legendre}消去
+$E_c=(\pi/2+KK_c-EK_c)/K$。
+附录 B 将全部代入常数与系数收集步骤逐行列出，结果为
+\begin{align}\label{eq:finaldirect}
+ 1147G(t_0)+3990H(t_0)
+ ={}&\frac{40608\sqrt2}{19\pi^2}\{(2+\sqrt7)K^2-2\sqrt7KE\}\notag\\
+ &+\frac{432}{95\pi}(329\sqrt2+195\sqrt{14}),
+\end{align}
+这里 $K=K(m_7)$、$E=E(m_7)$。
+古典输入\eqref{eq:CM}等价于
+\[
+ 4\sqrt7KE-2(2+\sqrt7)K^2=\pi,
+\]
+所以花括号为 $-\pi/2$。代回\eqref{eq:finaldirect}，得到
+\[
+ \frac{-101520\sqrt2+142128\sqrt2+84240\sqrt{14}}{95\pi}
+ =\frac{432(94\sqrt2+195\sqrt{14})}{95\pi}.
+\]
+这证明了\eqref{eq:VI3}，连同第 4 节即完成定理\ref{thm:main}。
+
+\appendix
+\section{四组证书的逐分量人工验算说明}\label{app:cert}
+本附录的用途是把“代入可验证”明确限定成有限的有理函数运算。
+所有函数均已在正文打印；本附录不调用任何程序输出作为前提。
+
+\subsection{前三阶行向量的全部分量}
+记 $\kappa=3\sigma+\omega$，且 $m_j$ 沿用\eqref{eq:mj}。定义
+\[
+ u_0=n\kappa'+n^2\kappa^2-3n^2\tau^2/d,\qquad
+ u_1=3n\tau'+3n^2\kappa\tau+3n\tau m_1,\qquad
+ u_2=6n^2\tau^2.
+\]
+由\eqref{eq:Drow}，明确有
+\begin{align*}
+ \ee_0&=(1,0,0,0),\qquad \ee_1=(n\kappa,3n\tau,0,0),\\
+ \ee_2&=(u_0,u_1,u_2,0),\\
+ (\ee_3)_0&=u_0'+n\kappa u_0-n\tau u_1/d,\\
+ (\ee_3)_1&=u_1'+3n\tau u_0+m_1u_1-2n\tau u_2/d,\\
+ (\ee_3)_2&=12n^2\tau\tau'+2n\tau u_1+m_2u_2,\\
+ (\ee_3)_3&=6n^3\tau^3.
+\end{align*}
+这几式可避免反复作矩阵乘法。
+
+\subsection{如何逐项核查两组三阶证书}
+对任一列出的 $R_n$，在\eqref{eq:Srow}中把 $r_j$ 换成 $R_{n+1,j}$。
+四个须检验的等式依次是
+\begin{align*}
+ w(\alpha^3R_{n+1,0}+\alpha^2R_{n+1,1}+\alpha R_{n+1,2}+R_{n+1,3})-R_{n,0}
+ &=\sum_{j=0}^3\ell_j(\ee_j)_0,\\
+ w\beta(3\alpha^2R_{n+1,0}+2\alpha R_{n+1,1}+R_{n+1,2})-R_{n,1}
+ &=\sum_{j=0}^3\ell_j(\ee_j)_1,\\
+ w\beta^2(3\alpha R_{n+1,0}+R_{n+1,1})-R_{n,2}
+ &=\sum_{j=0}^3\ell_j(\ee_j)_2,\\
+ w\beta^3R_{n+1,0}-R_{n,3}&=6\ell_3n^3\tau^3.
+\end{align*}
+这里 $\alpha=\alpha_n$、$\beta=\beta_n$；VI3 用 $(\ell_0,\ell_1,\ell_2,\ell_3)=(a_0,a_1,a_2,1)$。
+每式在消去 $(n+1)$ 后是关于 $n$ 的次数不超过三的多项式，系数为参数的有理函数。
+按 $1,n,n^2,n^3$ 收集左右之差，得到下表（行号是分量）：
+\begin{center}\begin{tabular}{c c c c c c}\toprule
+ 证书 & 分量 & $[n^0]$ & $[n^1]$ & $[n^2]$ & $[n^3]$\\\midrule
+ \eqref{eq:cert12} & $0$ & $0$ & $0$ & $0$ & $0$\\
+                  & $1$ & $0$ & $0$ & $0$ & $0$\\
+                  & $2$ & $0$ & $0$ & $0$ & $0$\\
+                  & $3$ & $0$ & $0$ & $0$ & $0$\\\midrule
+ \eqref{eq:cert3}  & $0$ & $0$ & $0$ & $0$ & $0$\\
+                  & $1$ & $0$ & $0$ & $0$ & $0$\\
+                  & $2$ & $0$ & $0$ & $0$ & $0$\\
+                  & $3$ & $0$ & $0$ & $0$ & $0$\\\bottomrule
+\end{tabular}\end{center}
+这不是有限个整数的数值试验：上面已给出各系数的计算规则和全部输入；
+读者对每个分量通分即可逐项审查。
+
+以下完整展开第四分量，以示具体的消去过程。写 $R_{n,0}=n^3f_0$、$R_{n,3}=n^3f_3$，
+则该式等价于 $-wd^3f_0-f_3=6\ell_3\tau^3$。
+在 VI1/VI2 族，左边是
+\begin{align*}
+ &\frac{27x(4x-1)^3}{(3x-1)^2}
+  \{72x^3+18x^2-12x+1-(12x^2-12x+1)\}\\
+ &\qquad=\frac{162x^3(4x-1)^3(12x+1)}{(3x-1)^2}
+ =6\ell_3\left(\frac3{3x-1}\right)^3.
+\end{align*}
+在 VI3 族，左边化为 $64(F_3-tF_0)/D^3$，而
+\[
+ F_3-tF_0=-6t^6-18t^4-18t^2-6=-6(t^2+1)^3,
+\]
+恰为 $6[-4(t^2+1)/D]^3$。
+其余三分量使用同样的通分和收集规则，无须极限或特殊函数运算。
+
+\subsection{如何逐项核查两组一阶余式证书}
+两组 $V_n$ 均只有 $0,1$ 两个非零分量，分别为
+\begin{align*}
+ \text{VI1/VI2:}\quad &V_{n,0}=a_0+a_2n+a_1n\kappa,
+             \quad V_{n,1}=3a_1n\tau;\\
+ \text{VI3:}\quad &V_{n,0}=n(1-\BB\kappa)-\Afun,
+             \quad V_{n,1}=-3\BB n\tau.
+\end{align*}
+这里第一行的 $a_0,a_1,a_2$ 是第 3.3 节的余式系数，非第 5 节算子系数。
+任一组 $S_n=(0,n^2s_1,n^2s_2,0)$，均满足
+\[
+ \begin{aligned}
+ (\Sop_nS_{n+1}-S_n)_0&=w\{\alpha^2(n+1)^2s_1+\alpha(n+1)^2s_2\},\\
+ (\Sop_nS_{n+1}-S_n)_1&=w\beta\{2\alpha(n+1)^2s_1+(n+1)^2s_2\}-n^2s_1,\\
+ (\Sop_nS_{n+1}-S_n)_2&=n^2(wd^2s_1-s_2),\\
+ (\Sop_nS_{n+1}-S_n)_3&=0.
+ \end{aligned}
+\]
+另一方面用\eqref{eq:Drow}计算 $(\Dop_nV_n-\nu V_n)_k$ 或
+$(\Dop_nV_n-\rho V_n)_k$。两边次数不超过二；
+按 $1,n,n^2$ 收集，四个分量的三个系数差均为零。
+例如第三分量分别约为
+\[
+ wd^2s_1-s_2=6a_1\tau^2\quad\hbox{或}\quad wd^2s_1-s_2=-6\BB\tau^2.
+\]
+对 VI3，后一恒等式通分后仅需
+\[
+ -t(t-1)(2t^2+7t+1)+(t+1)(t^2-7t+2)
+ =-2(t^2+1)(t^2+2t-1),
+\]
+展开两边即证；对 VI1/VI2，代入\eqref{eq:S12}同样得到
+$6[-(3x-1)(4x-1)(6x-1)x]\,[3/(3x-1)]^2$。
+所有 $R_0,S_0$ 均由其明示的 $n^2$ 或 $n^3$ 因子为零。
+
+\section{VI3 的最后常数消去，逐步展开}\label{app:final}
+本附录提供\eqref{eq:finaldirect}的纯代数推导。
+写 $r=\sqrt7$，$K=K(m_7)$、$E=E(m_7)$，并令
+$F=3K^2+K_c^2$。先把 $m$ 保留为变量，则
+\[
+ \frac{\dd F}{\dd m}
+ =\frac{3KE-K_cE_c-3(1-m)K^2+mK_c^2}{m(1-m)}.
+\]
+在目标点才使用 $K_c=rK$ 和 Legendre 关系
+$K_cE_c=r\pi/2+r^2K^2-r^2KE$，于是
+\begin{align*}
+ F\big|_{m_7}&=10K^2,\\
+ F_m\big|_{m_7}&=\frac{10KE+(-10+10m_7)K^2-r\pi/2}{m_7(1-m_7)}.
+\end{align*}
+注意 $m_7(1-m_7)=1/256$，而
+$10(1-m_7)=5+15r/8$。
+由 $G=PF/\pi^2$，$G'=(P'F+Pm'F_m)/\pi^2$，
+以及 $1147+3990\Afun=4230/19$、$3990\BB=10528/27$，可逐项写为
+\begin{align*}
+ 1147G+3990H
+ ={}&\frac1{\pi^2}\left[
+  10\left(\frac{4230}{19}P+\frac{10528}{27}P'\right)K^2
+       +\frac{10528}{27}Pm'F_m\right]
+       +\frac{3990\cdot3}{4\pi}\RR.
+\end{align*}
+将第 7.2 节表中 $P,P',m',\RR$ 代入，按 $K^2,KE,\pi$ 收集即得
+\begin{center}\small\begin{tabular}{c c}\toprule
+ 项 & 在最终表达式中的系数\\\midrule
+ $K^2$ & $40608\sqrt2(2+\sqrt7)/(19\pi^2)$\\
+ $KE$ & $-81216\sqrt{14}/(19\pi^2)$\\
+ 不含 $K,E$ 的项 & $432(329\sqrt2+195\sqrt{14})/(95\pi)$\\\bottomrule
+\end{tabular}\end{center}
+这正是\eqref{eq:finaldirect}。最后一步只需代入\eqref{eq:CM}的 $\alpha(7)$ 值，
+无须另假设某条涉及待证三项式级数的求值。
+
+\clearpage
+\begin{thebibliography}{9}
+\bibitem{Sun} Z.-W. Sun,
+\emph{Mysterious $\pi$-Series (II)}, lecture slides, January 12, 2023,
+p.~40/68, ``My conjectural series of type VI''.
+\url{http://maths.nju.edu.cn/~zwsun/Pi-series(II).pdf}.
+\bibitem{ChanLiaw} H. H. Chan and W.-C. Liaw,
+\emph{Cubic modular equations and new Ramanujan-type series for $1/\pi$},
+Pacific J. Math. \textbf{192} (2000), 219--238; p.~219, (1.1), (1.2).
+\url{https://msp.org/pjm/2000/192-2/pjm-v192-n2-p02-p.pdf}.
+\bibitem{Borwein} J. M. Borwein and P. B. Borwein,
+\emph{Explicit Ramanujan-type approximations to pi of high order},
+Proc. Indian Acad. Sci. (Math. Sci.) \textbf{97} (1987), 53--59;
+p.~57, the $N=7$ example.
+\url{https://www.cecm.sfu.ca/~pborwein/PAPERS/P35.pdf}.
+\bibitem{DLMF15} NIST Digital Library of Mathematical Functions,
+Chapter 15, especially Gauss summation at unity and quadratic transformations.
+\url{https://dlmf.nist.gov/15.4}, \url{https://dlmf.nist.gov/15.8}.
+\bibitem{DLMF16} NIST DLMF, \S16.12, especially Clausen's formula (16.12.2).
+\url{https://dlmf.nist.gov/16.12}.
+\bibitem{DLMF19} NIST DLMF, Chapter 19, complete elliptic integrals,
+derivatives and Legendre's relation.
+\url{https://dlmf.nist.gov/19.4}, \url{https://dlmf.nist.gov/19.7}.
+\end{thebibliography}
+\end{document}

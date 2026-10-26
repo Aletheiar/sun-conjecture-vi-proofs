@@ -21,6 +21,11 @@ review, priority, and prize eligibility have not been established.
 
 ## 阅读顺序
 
+**优先阅读：[三式完整统一 PDF（15 页，无需运行 Python）](./paper/sun_vi_standalone_proof_2026-10-26.pdf)。**
+该稿包含全部证书、有限代数核查规则、解析证明及最后求值；
+[LaTeX 源文件和章节说明](./paper/README.md)一并提供。
+下面的分稿与核验代码保留作补充材料。
+
 1. [VI1、VI2 证明正文](./VI1_VI2_PROOF_2026-10-25.md)：同一参数族到两条经典 Ramanujan 级数。
 2. [VI3 证明正文](./VI3_PROOF_2026-10-25.md)：新参数族、实际周期的三项匹配与非零边界常数。
 3. [VI3 全部字面证书](./VI3_EXPLICIT_CERTIFICATES_2026-10-25.md)：不依赖 JSON 即可检查。
