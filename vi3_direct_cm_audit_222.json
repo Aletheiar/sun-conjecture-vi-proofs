@@ -1,0 +1,14 @@
+{
+  "method": "formal generic state derivation; direct K E Kc Ec elimination",
+  "classical_inputs": [
+    "m7=(8-3sqrt7)/16",
+    "Kc/K=sqrt7",
+    "alpha7=(sqrt7-2)/2"
+  ],
+  "R3_used": false,
+  "target": "(40608*sqrt(2) + 84240*sqrt(14))/(95*pi)",
+  "K2_coefficient": "40608*(2*sqrt(2) + sqrt(14))/(19*pi**2)",
+  "KE_coefficient": "-81216*sqrt(14)/(19*pi**2)",
+  "constant_after_legendre": "432*(329*sqrt(2) + 195*sqrt(14))/(95*pi)",
+  "omitted_boundary_error": "16848*(-3*sqrt(14) - 7*sqrt(2))/(19*pi*(sqrt(7) + 3))"
+}

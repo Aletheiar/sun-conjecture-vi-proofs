@@ -1,0 +1,28 @@
+{
+  "generated_utc": "2026-10-26T05:58:04.099921+00:00",
+  "python": "3.11.15",
+  "sympy": "1.14.0",
+  "isolated_mode": true,
+  "whitelist_files": 34,
+  "verification": [
+    {
+      "script": "verify_vi12_elliptic_reduction_210.py",
+      "exit_code": 0
+    },
+    {
+      "script": "verify_vi12_hypergeometric_211.py",
+      "exit_code": 0
+    },
+    {
+      "script": "verify_vi3_proof_220.py",
+      "exit_code": 0
+    },
+    {
+      "script": "verify_vi3_literal_certificates_223.py",
+      "exit_code": 0
+    }
+  ],
+  "scope": "Reproducible exact checks only; independent AI review and response completed; professional mathematical review pending",
+  "archive": "PROOF_REVIEW_BUNDLE_2026-10-25.zip",
+  "archive_sha256": "d66409d2199fd6b0f0631059994e16e821c91309b631fe764ebd1dc2536b2b0b"
+}

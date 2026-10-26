@@ -1,0 +1,41 @@
+[E] P1: original ratio gap has denominator (n+1)^2 = 0
+[E] P1: reviewer bound gap has denominator (n+1)^3 = 0
+[E] The two gaps differ by the positive factor n+1 = 0
+[E] Wallis induction base C_0^2 = 1 = 0
+[finite diagnostic] G = 1 + x + 13*x**2 - 37*x**3 + O(x**4)
+[finite diagnostic] H = x + 40*x**2 + 217*x**3 + O(x**4)
+[E] Report -54*x^2 is not the actual Y coefficient = 0
+[E] Direct Y coefficients through x^7 vanish (finite diagnostic only) = 0
+[finite diagnostic] Y using only G=1+x,H=x = 14*x**2 + O(x**3)
+[E] Exact homogeneous solution log derivative = 0
+[E] VI12 positive-side majorant derivative = 0
+[E] VI12 negative-side majorant derivative = 0
+[E] VI12 endpoint majorant at x=1/36 = 0
+[E] VI12 endpoint majorant at x=-1/60 = 0
+[E] Raw elliptic product 0 has the same nonzero constant K0^2 = 0
+[E] Raw elliptic product 1 has the same nonzero constant K0^2 = 0
+[E] Raw elliptic product 2 has the same nonzero constant K0^2 = 0
+[E] Adapted basis 0 leading coefficient = 0
+[E] Adapted basis 1 lower coefficient 0 vanishes = 0
+[E] Adapted basis 1 leading coefficient = 0
+[E] Adapted basis 2 lower coefficient 0 vanishes = 0
+[E] Adapted basis 2 lower coefficient 1 vanishes = 0
+[E] Adapted basis 2 leading coefficient = 0
+[E] Adapted basis determinant = 64*K0^3*K1^3, nonzero = 0
+[E] Actual candidate constant coefficient h = 0
+[E] Candidate sqrt(t) coefficient -2/pi using K0*K1=pi/2 = 0
+[E] Candidate t coefficient j-h/2 = 0
+[E] Uniform second derivative rational bound for n>=2 = 0
+[E] Derivative geometric-series majorant = 0
+[E] Second derivative geometric-series majorant = 0
+[E] Uniform Taylor remainder constant = 2342/27 = 0
+[E] VI3 s decreases from 1 on (0,1) = 0
+[E] VI3 second geometric ratio is increasing on (0,1) = 0
+[E] VI3 second ratio at t=7/9 is 343/512 = 0
+[E] Endpoint A(0)=-3/8 = 0
+[E] Endpoint B(0)=-1/4 = 0
+[E] Endpoint sqrt(t)*R(t) tends to 1 = 0
+[E] Nonzero derivative constant from independently determined limits = 0
+[E] report |U_n| <= (b+2*sqrt(c))^n is false for VI3: n=2,t=1/10
+[E] Correct positive bound at t=1/10 is |b|+2sqrt(c)=4(1-t^2) = 0
+EXACT CHECKS: 37 ; FAILURES: 0

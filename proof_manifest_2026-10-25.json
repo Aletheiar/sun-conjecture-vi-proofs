@@ -1,0 +1,179 @@
+{
+  "generated_utc": "2026-10-26T05:45:40.907858+00:00",
+  "status": "Complete computer-assisted proof drafts; independent AI review and author response completed; professional mathematical review and priority pending",
+  "files": [
+    {
+      "path": "VI1_VI2_PROOF_2026-10-25.md",
+      "bytes": 7907,
+      "sha256": "491b50ae6eae67f97afd1d83177be5b616ccedda9e6b04c88a996449ebf6ba53"
+    },
+    {
+      "path": "VI3_PROOF_2026-10-25.md",
+      "bytes": 15106,
+      "sha256": "780a8beb4d469ef2047aa997fba93ecae127e5f2f2ec014b7e899319fdd109f3"
+    },
+    {
+      "path": "PROOF_INDEX_2026-10-25.md",
+      "bytes": 3772,
+      "sha256": "8546ddc24121231286f5e09e0d648eceb9b488813d75f05f7d6bcc17bc4b0465"
+    },
+    {
+      "path": "PROOF_REVIEW_PROMPT_2026-10-25.md",
+      "bytes": 2609,
+      "sha256": "b66921860e84b84f83bad03544bde29209462da271258a86a73731bba371c2f4"
+    },
+    {
+      "path": "verify_vi12_elliptic_reduction_210.py",
+      "bytes": 4248,
+      "sha256": "64326e91d319d3d6bf7b05776274caf97b365de7b0df5166c347f8c820136c1b"
+    },
+    {
+      "path": "verify_vi12_hypergeometric_211.py",
+      "bytes": 2717,
+      "sha256": "dcbdc3f2912073ace61a17b9b8bddbd5698d91894a64aa00a6a04661358e1e1c"
+    },
+    {
+      "path": "verify_vi3_proof_220.py",
+      "bytes": 5019,
+      "sha256": "b13fa75d82ff5e936ab22d26ee3728c03dee91e7aeab4be3ccb52f3c3645c243"
+    },
+    {
+      "path": "vi12_rank19_operator_206.json",
+      "bytes": 595,
+      "sha256": "33107eedba45f275ad2f747602c84e27906eec37cd79e152e29efe13ba1705db"
+    },
+    {
+      "path": "vi12_telescoping_208.json",
+      "bytes": 645,
+      "sha256": "a2d157f88efba5f5e00c9d0f756296427554d569d156f57ce8b9dd0a66be4820"
+    },
+    {
+      "path": "vi12_normal_residual_209.json",
+      "bytes": 198,
+      "sha256": "c253a10cd65b9e47168d4bb3b3efe4a1b8a30f73df840c17f5ced3719963caf5"
+    },
+    {
+      "path": "vi12_weight_translation_210.json",
+      "bytes": 208,
+      "sha256": "1028910973c5d64657b8deee4c9ee9100a56aea776e3593534d9cd29f438746c"
+    },
+    {
+      "path": "vi12_hypergeometric_translation_211.json",
+      "bytes": 329,
+      "sha256": "f295b20030524c5d4234d7318f00c86833c45d9401062be232497f30a08deae7"
+    },
+    {
+      "path": "audit_vi3_new_locus_216.py",
+      "bytes": 1481,
+      "sha256": "aff709ec97cb22d0bbfce07aa8ebf0c9985d76b580d4863a84cf0f8e9db1ce7c"
+    },
+    {
+      "path": "derive_vi3_locus_operator_217.py",
+      "bytes": 2212,
+      "sha256": "4491b639b54e3238989755e281c2cc8192d2ad8f0369def0c994ac6f758f1177"
+    },
+    {
+      "path": "analyze_vi3_hypergeometric_218.py",
+      "bytes": 1436,
+      "sha256": "f787c73cb20e696e3a3c6dff05bbe4e5904b07d3addec907aa4f47319d851035"
+    },
+    {
+      "path": "derive_vi3_normal_system_219.py",
+      "bytes": 2120,
+      "sha256": "f624011b0e163d97ec10d7102127a31dbc2d99727be25b6ab51309f757f5768a"
+    },
+    {
+      "path": "vi3_locus_operator_217.json",
+      "bytes": 1246,
+      "sha256": "79f99e0c0dc32909b22ffbdeb164706ab25de3aea6198800adb98db2445db1df"
+    },
+    {
+      "path": "vi3_normal_system_219.json",
+      "bytes": 771,
+      "sha256": "b14c887bc1c1f8e196c63321c0f1df229c170150ef600ad0598c1cda5c12da7f"
+    },
+    {
+      "path": "vi3_hypergeometric_218.json",
+      "bytes": 496,
+      "sha256": "55c3c18e0ba0a5dffac1176d73e267b0d73ec8a78e6359693e48e9c7a15eaaa7"
+    },
+    {
+      "path": "vi3_verified_formula_220.json",
+      "bytes": 548,
+      "sha256": "3d612bfdfe1a3821f090d62a98687f387af64256bc592df592f61b0ea696ad4b"
+    },
+    {
+      "path": "audit_vi3_uniform_endpoint_remainder_221.py",
+      "bytes": 3167,
+      "sha256": "4a83fccef4ebffd882d294ddf0901b81ac864e608a8401a9d24fd9e4a3cfb8e2"
+    },
+    {
+      "path": "vi3_uniform_endpoint_remainder_221.json",
+      "bytes": 343,
+      "sha256": "7b42e9212ec2dd8178d9a02c7b1fc2edab783e24c99d939cc4cd5d9944679f50"
+    },
+    {
+      "path": "audit_state_and_vi3_cm_direct_222.py",
+      "bytes": 3784,
+      "sha256": "bbcc4bb701d6506983abca7f412747518190739d4b94d0f7376f717fc2f9518d"
+    },
+    {
+      "path": "vi3_direct_cm_audit_222.json",
+      "bytes": 535,
+      "sha256": "c5402f0c3af5fd440591f8d643a7fc79f383444288287f0d2ce15c53b0e4c40c"
+    },
+    {
+      "path": "verify_vi3_literal_certificates_223.py",
+      "bytes": 2292,
+      "sha256": "a06c38082c39fc6b5028651b0da89ed14eac9c51388c22e03b6cf033d47a98be"
+    },
+    {
+      "path": "VI3_EXPLICIT_CERTIFICATES_2026-10-25.md",
+      "bytes": 2608,
+      "sha256": "4dd551dae8baf30dc4ef74a58460a69cd64a008039265df85d20f6c414ccdbf5"
+    },
+    {
+      "path": "certify_vi12_telescoping_208.py",
+      "bytes": 3024,
+      "sha256": "4f3d8c68d877d5dd51525fa47f2d4689b70908f46a6dba84cddac63e58bc2879"
+    },
+    {
+      "path": "certify_vi12_normal_209.py",
+      "bytes": 2131,
+      "sha256": "1da29dfe5d44a97c68fe7a4c7a4392be831e3ca220af6ce1d1bfbc5d25207b1e"
+    },
+    {
+      "path": "requirements-proof.txt",
+      "bytes": 14,
+      "sha256": "25f9f1fb1988b230147a1d3092d34e09c069eb7a6c6d6df46b3973b9f2d36efc"
+    },
+    {
+      "path": "PROOF_REPRODUCTION_2026-10-25.md",
+      "bytes": 2461,
+      "sha256": "6962c1fda65ad90510f75a11a69f46a4e1bc3729b7c69180602323e29acaf74f"
+    },
+    {
+      "path": "package_proof_review_224.py",
+      "bytes": 2923,
+      "sha256": "4c8cc416c4ccaf8337f9b1c0d16f37f1c2fb6e9311df275a5f2817dd2daf063a"
+    },
+    {
+      "path": "audit_deepseek_final_review_225.py",
+      "bytes": 5696,
+      "sha256": "f00c91132525e8dd0993c134d523ccf7f3073119de8ffb2490ed25ad77846fce"
+    },
+    {
+      "path": "gpt_review_response_2026-10-26.md",
+      "bytes": 9939,
+      "sha256": "6e25d7eec890a3c8e65eea327bd818035875e5b40a74ded962d42da2ce9623dd"
+    },
+    {
+      "path": "gpt_review_followup_2026-10-26/audit_deepseek_final_review_225.log",
+      "bytes": 2156,
+      "sha256": "72a85802e708b15049be9b3445bc2aaadb677043dc36b443bafd34ede65cc772"
+    }
+  ],
+  "revision_note": "Public copy: GitHub-compatible math and portable Python commands; mathematical certificates unchanged",
+  "previous_manifest_sha256": "c9475cd0e036489986e59a29a61fbd2ab5fafe14cd5a63bc40fad3d757251217",
+  "previous_archive_sha256": "2cdad4656630b558a5a4d3dcf6a659c59bb4154298cbc109beb7235ed2130b2f"
+}

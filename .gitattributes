@@ -1,0 +1,2 @@
+# Proof manifests hash exact bytes. Disable checkout/commit newline conversion.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

@@ -1,0 +1,62 @@
+[
+  {
+    "file": "01_vi12_certificates.py",
+    "source_sha256": "b7a3fd97270d05fc7c4f1dc81b567c5655baa360e08f209f09636d99bde53928",
+    "public_sha256": "b7a3fd97270d05fc7c4f1dc81b567c5655baa360e08f209f09636d99bde53928",
+    "change": "verbatim"
+  },
+  {
+    "file": "02_vi3_certificates.py",
+    "source_sha256": "c0bc35294fd8eb1b0ac466bbf65d69e80ca1a2ff599912f08de8694540d112af",
+    "public_sha256": "c0bc35294fd8eb1b0ac466bbf65d69e80ca1a2ff599912f08de8694540d112af",
+    "change": "verbatim"
+  },
+  {
+    "file": "03_operator_annihilation.py",
+    "source_sha256": "30711013e4ab7f18067c85e95c64f8ac14965abb46f68cf75725150ce9a8fb59",
+    "public_sha256": "30711013e4ab7f18067c85e95c64f8ac14965abb46f68cf75725150ce9a8fb59",
+    "change": "verbatim"
+  },
+  {
+    "file": "04_reduction_algebra.py",
+    "source_sha256": "845fe12edc14c26b7db8db8dbbf0669090bf3d78d6fac7c23d2e30378844b8d3",
+    "public_sha256": "845fe12edc14c26b7db8db8dbbf0669090bf3d78d6fac7c23d2e30378844b8d3",
+    "change": "verbatim"
+  },
+  {
+    "file": "05_numerics_targets.py",
+    "source_sha256": "86ffa922b80b79a38ed0223ee4831122ed1c01a135617b18a8a71adb8e23a546",
+    "public_sha256": "86ffa922b80b79a38ed0223ee4831122ed1c01a135617b18a8a71adb8e23a546",
+    "change": "verbatim"
+  },
+  {
+    "file": "06_functional_identities.py",
+    "source_sha256": "94ef3c616177cfa467efa88963a0d6254daa2fafd9b44949b2babbd9f1b86b02",
+    "public_sha256": "94ef3c616177cfa467efa88963a0d6254daa2fafd9b44949b2babbd9f1b86b02",
+    "change": "verbatim"
+  },
+  {
+    "file": "07_boundary_terms.py",
+    "source_sha256": "6a3b2737c2567aedb9b83f0dd931c56b4c4e9810197bf5631773ff3f22af7d6d",
+    "public_sha256": "6a3b2737c2567aedb9b83f0dd931c56b4c4e9810197bf5631773ff3f22af7d6d",
+    "change": "verbatim"
+  },
+  {
+    "file": "08_external_inputs.py",
+    "source_sha256": "2c188d5d07e538115b1c1c0042d9cfe03dbb90506f43f77b8fbba7629f7e4b84",
+    "public_sha256": "2c188d5d07e538115b1c1c0042d9cfe03dbb90506f43f77b8fbba7629f7e4b84",
+    "change": "verbatim"
+  },
+  {
+    "file": "09_endpoint_majorants.py",
+    "source_sha256": "f15cdc4620f6d652025fff8a2828b6ff693c3750f4d0fcf2ce56450f21fed491",
+    "public_sha256": "f15cdc4620f6d652025fff8a2828b6ff693c3750f4d0fcf2ce56450f21fed491",
+    "change": "verbatim"
+  },
+  {
+    "file": "REPORT.md",
+    "source_sha256": "8bf63e6f434e627bcdf2b4fc8243a4ef92e8a86504f7a73e670e9e3cec90304a",
+    "public_sha256": "f0e03b256d9a89cdebf7a88a68c3e69386e3ff03b899d7f58c8b1dea63e7925f",
+    "change": "portable interpreter, public reproduction command and GitHub Markdown formatting only"
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "VI1": {
+    "x": "1/36",
+    "G_coefficient": "195/11",
+    "thetaG_coefficient": "80"
+  },
+  "VI2": {
+    "x": "-1/60",
+    "G_coefficient": "1969/63",
+    "thetaG_coefficient": "352/3"
+  }
+}

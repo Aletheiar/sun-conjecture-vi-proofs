@@ -1,0 +1,11 @@
+{
+  "G_formula": "P*(3*K(m)^2+K(1-m)^2)/pi^2",
+  "normal_A": "3*(t - 1)*(t**2 + 1)*(t**2 + t + 1)/(8*(t**2 - t - 1)**2)",
+  "normal_B": "(t - 1)*(t + 1)*(t**2 + 2*t - 1)/(4*(t**2 - t - 1))",
+  "normal_R": "sqrt(1 - t)*(t + 1)*(t**2 + 1)/(sqrt(t)*(t**2 - t - 1)**2)",
+  "normal_constant": "3/(4*pi)",
+  "classical_H_coefficient": "-6345*sqrt(2)/19",
+  "classical_thetaH_coefficient": "-53298*sqrt(2)/19",
+  "extra_pi_coefficient": "142128*sqrt(2)/95 + 16848*sqrt(14)/19",
+  "target_pi_coefficient": "40608*sqrt(2)/95 + 16848*sqrt(14)/19"
+}

@@ -1,0 +1,14 @@
+{
+  "VI1": {
+    "z": "2/27",
+    "factor": "80*sqrt(2)/11",
+    "classical_series_value": "27/(4*pi)",
+    "original_value": "540*sqrt(2)/(11*pi)"
+  },
+  "VI2": {
+    "z": "4/125",
+    "factor": "352*sqrt(15)/189",
+    "classical_series_value": "15*sqrt(3)/(2*pi)",
+    "original_value": "880*sqrt(5)/(21*pi)"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "eta0": "1/4",
+  "t_valid": "0<t<=1/5",
+  "M1": "25/9",
+  "M2": "182/27",
+  "bound_constant": "2342/27",
+  "bound": "abs(G-Hclassic(s)-eta*D(s)) <= (2342/27)*eta^2*Hclassic(s)",
+  "consequence": "G=h-2/pi*sqrt(t)+(j-h/2)*t+O(t^(3/2))",
+  "scope": "Analytic inequalities in addendum; finite polynomial checks labelled separately"
+}
